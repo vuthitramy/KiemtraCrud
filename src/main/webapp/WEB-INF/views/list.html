@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<h1>List products</h1>
+<div th:if="${message}">
+    <span style="color: #b0006d;" th:text="${message}"></span>
+</div>
+<button><a th:href="@{/products/add-product}">Create</a></button>
+<table border="1px solid black">
+    <tr>
+        <td>#</td>
+        <td>Name</td>
+        <td>Details</td>
+        <td>Price</td>
+        <td>Action</td>
+    </tr>
+
+    <tr th:each="product, state : ${listProducts}">
+        <!--        <input type="hidden" th:text="${product.id}">-->
+        <td th:text="${state.count}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.detail}"></td>
+        <td th:text="${product.price}"></td>
+        <td>
+            <a th:href="@{/products/edit-product/{id}(id= ${product.id})}">edit</a>
+            <a th:href="@{/products/delete/{id}(id=${product.id})}">delete</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
